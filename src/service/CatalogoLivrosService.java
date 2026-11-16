@@ -25,19 +25,17 @@ public class CatalogoLivrosService {
     public void adicionarLivro(Livro livro) throws LivroJaExisteException {
         
         if (livro == null || livro.getIsbn() == null || livro.getIsbn().isBlank()) {
-            throw new IllegalArgumentException("Os dados do livro e o ISBN não podem ser vazios.");
+            throw new IllegalArgumentException("Os dados do livro e o ISBN nao podem ser vazios.");
         }
 
-        // Set.add() retorna false caso o ISBN já exista
         if (!isbnsCadastrados.add(livro.getIsbn())) {
-            throw new LivroJaExisteException("Falha ao adicionar: já existe um livro cadastrado com o ISBN " + livro.getIsbn());
+            throw new LivroJaExisteException("Falha ao adicionar: ja existe um livro cadastrado com o ISBN " + livro.getIsbn());
         }
 
         mapaLivrosPorIsbn.put(livro.getIsbn(), livro);
         listaLivros.add(livro);
     }
 
-    // Remove livro por ISBN lançando exceção personalizada caso não exista
     public void removerLivro(String isbn) throws LivroNaoEncontradoException {
 
         if (!isbnsCadastrados.contains(isbn)) {
@@ -54,7 +52,7 @@ public class CatalogoLivrosService {
         Livro livro = mapaLivrosPorIsbn.get(isbn);
 
         if (livro == null) {
-            throw new LivroNaoEncontradoException("Busca sem resultados: ISBN " + isbn + " não encontrado no catálogo.");
+            throw new LivroNaoEncontradoException("Busca sem resultados: ISBN " + isbn + " nao encontrado no catalogo.");
         }
 
         return livro;
@@ -68,11 +66,11 @@ public class CatalogoLivrosService {
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(caminhoArquivo))) {
             oos.writeObject(listaLivros);
-            System.out.println("[I/O] Catálogo salvo com sucesso em: " + caminhoArquivo);
+            System.out.println("[I/O] Catalogo salvo com sucesso em: " + caminhoArquivo);
         } catch (FileNotFoundException e) {
-            System.err.println("[Erro de Arquivo] Caminho inválido ou arquivo não pôde ser criado: " + e.getMessage());
+            System.err.println("[Erro de Arquivo] Caminho invalido ou arquivo não pode ser criado: " + e.getMessage());
         } catch (IOException e) {
-            System.err.println("[Erro de I/O] Falha ao serializar os dados do catálogo: " + e.getMessage());
+            System.err.println("[Erro de I/O] Falha ao serializar os dados do catalogo: " + e.getMessage());
         }
 
     }
@@ -93,15 +91,15 @@ public class CatalogoLivrosService {
                 listaLivros.add(livro);
             }
 
-            System.out.println("[I/O] Catálogo carregado com sucesso (" + listaLivros.size() + " livros restaurados).");
+            System.out.println("[I/O] Catalogo carregado com sucesso (" + listaLivros.size() + " livros restaurados).");
 
         } catch (FileNotFoundException e) {
-            System.err.println("[Erro de Arquivo] Arquivo de catálogo não encontrado: " + e.getMessage());
+            System.err.println("[Erro de Arquivo] Arquivo de catalogo nao encontrado: " + e.getMessage());
         } catch (IOException e) {
             System.err.println("[Erro de I/O] Falha ao ler o arquivo serializado: " + e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.err.println("[Erro de Desserialização] Classe Livro incompatível ou não encontrada: " + e.getMessage());
+            System.err.println("[Erro de Desserializacao] Classe Livro incompativel ou nao encontrada: " + e.getMessage());
         }
     }
-    
+
 }

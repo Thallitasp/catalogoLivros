@@ -13,18 +13,18 @@ public class Main {
 
         System.out.println("=== 1. ADICIONANDO LIVROS E VALIDANDO DUPLICIDADE (SET + HASHMAP) ===");
         try {
-            catalogo.adicionarLivro(new Livro("978-8576082675", "Código Limpo", "Robert C. Martin", 2009));
+            catalogo.adicionarLivro(new Livro("978-8576082675", "Codigo Limpo", "Robert C. Martin", 2009));
             catalogo.adicionarLivro(new Livro("978-8550804620", "Java Efetivo", "Joshua Bloch", 2019));
-            catalogo.adicionarLivro(new Livro("978-8573076103", "Padrões de Projetos", "Erich Gamma et al.", 2000));
+            catalogo.adicionarLivro(new Livro("978-8573076103", "Padroes de Projetos", "Erich Gamma et al.", 2000));
             System.out.println("Livros iniciais cadastrados com sucesso!");
 
-            catalogo.adicionarLivro(new Livro("978-8576082675", "Código Limpo (Duplicado)", "Robert C. Martin", 2009));
-            
+            catalogo.adicionarLivro(new Livro("978-8576082675", "Codigo Limpo (Duplicado)", "Robert C. Martin", 2009));
+
         } catch (LivroJaExisteException e) {
-            System.err.println("[Exceção Personalizada]: " + e.getMessage());
+            System.err.println("[Excecao Personalizada]: " + e.getMessage());
         }
 
-        System.out.println("\n=== 2. BUSCA E REMOÇÃO POR ISBN ===");
+        System.out.println("\n=== 2. BUSCA E REMOCAO POR ISBN ===");
         
         try {
 
@@ -37,10 +37,10 @@ public class Main {
             catalogo.removerLivro("000-0000000000");
 
         } catch (LivroNaoEncontradoException e) {
-            System.err.println("[Exceção Personalizada]: " + e.getMessage());
+            System.err.println("[Excecao Personalizada]: " + e.getMessage());
         }
 
-        System.out.println("\n=== 3. PERSISTÊNCIA VIA SERIALIZAÇÃO (I/O) ===");
+        System.out.println("\n=== 3. PERSISTENCIA VIA SERIALIZACAO (I/O) ===");
         catalogo.salvarCatalogo(arquivoCatalogo);
 
         CatalogoLivrosService novoCatalogo = new CatalogoLivrosService();
